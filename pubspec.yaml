@@ -1,0 +1,22 @@
+name: dart_server_plus
+description: dart_server_plus is a Dart ORM library that simplifies server-side development with support for MySQL and PostgreSQL. It streamlines tasks such as server setup, schema definition, and CRUD operations. With features like advanced querying, relationship management, and optional logging, dart_server_plus makes building scalable and efficient applications straightforward.
+version: 1.0.0
+repository: https://github.com/kananikalpesh/dart_server_plus.git
+
+platforms:
+  linux:
+  macos:
+  windows:
+
+environment:
+  sdk: ^3.4.4
+
+dependencies:
+  archive: ^3.6.1
+  mime: ^1.0.5
+  mysql_client: ^0.0.27
+  postgres: ^3.2.1
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
