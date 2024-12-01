@@ -2,7 +2,7 @@
 
 <br />
 
-dart_server_plus is a sophisticated Object-Relational Mapping (ORM) library for Dart, aimed at simplifying server-side development and database management. It offers a robust set of features to facilitate the creation and management of servers, connections to databases, and handling of various data operations. With support for both MySQL and PostgreSQL databases, dart_server_plus enables you to build efficient and scalable applications with minimal effort.
+dart_server_plus is a sophisticated Object-Relational Mapping (DartServerPlus) library for Dart, aimed at simplifying server-side development and database management. It offers a robust set of features to facilitate the creation and management of servers, connections to databases, and handling of various data operations. With support for both MySQL and PostgreSQL databases, dart_server_plus enables you to build efficient and scalable applications with minimal effort.
 
 <br />
 
@@ -122,14 +122,14 @@ Replace the placeholder values with your actual database host, database name, us
 
 <br />
 
-#### Initializing the ORM
+#### Initializing the DartServerPlus
 
-Once you have defined your schema and established a database connection, you can initialize the ORM and synchronize the database schema:
+Once you have defined your schema and established a database connection, you can initialize the DartServerPlus and synchronize the database schema:
 ```
-ORM orm = ORM(client: client, schemas: [userSchema], logging: true);
-await orm.sync(syncTable: true);
+DartServerPlus dartServerPlus = DartServerPlus(client: client, schemas: [userSchema], logging: true);
+await dartServerPlus.sync(syncTable: true);
 ```
-This code initializes the ORM with the database client and schema, and synchronizes the schema with the database. The syncTable parameter ensures that existing tables are updated or recreated as necessary.
+This code initializes the DartServerPlus with the database client and schema, and synchronizes the schema with the database. The syncTable parameter ensures that existing tables are updated or recreated as necessary.
 
 
 Registering Routes and Performing CRUD Operations
@@ -141,7 +141,7 @@ Inserting a New Record
 To handle a POST request for inserting a new record:
 ```
 userRouter.post("/insert", (req, res) async {
-  var data = await orm.insert(
+  var data = await DartServerPlus.insert(
     table: "users",
     returning: true,
     data: {
@@ -167,7 +167,7 @@ To handle a DELETE request for removing a record:
 
 ```
 userRouter.delete("/delete", (req, res) async {
-  var data = await orm.delete(
+  var data = await DartServerPlus.delete(
     table: "users",
     returning: true,
     where: {'id': 1}
@@ -186,7 +186,7 @@ To handle a PATCH request for updating an existing record:
 
 ```
 userRouter.patch("/update", (req, res) async {
-  var data = await orm.update(
+  var data = await DartServerPlus.update(
     table: "users",
     returning: true,
     data: {'verify': true}
@@ -204,7 +204,7 @@ To handle a GET request for retrieving all records:
 
 ```
 userRouter.get("/all", (req, res) async {
-  var data = await orm.findAll(table: "users");
+  var data = await DartServerPlus.findAll(table: "users");
   return res.json({'data': data});
 });
 ```
@@ -221,7 +221,7 @@ Counting Records<br />
 To count the number of records in a table:
 
 ```
-var data = await orm.count(table: "users");
+var data = await DartServerPlus.count(table: "users");
 ```
 This query returns the total number of records in the users table.
 
@@ -232,7 +232,7 @@ This query returns the total number of records in the users table.
 To retrieve only specific fields from a table:
 
 ```
-var data = await orm.findAll(
+var data = await DartServerPlus.findAll(
   table: "users",
   fields: ['id', 'first_name', 'last_name']
 );
@@ -247,7 +247,7 @@ This query fetches only the id, first_name, and last_name fields from the users 
 To apply pagination and ordering to your queries:
 
 ```
-var data = await orm.findAncCountAll(
+var data = await DartServerPlus.findAncCountAll(
   table: "users",
   limit: 10,
   offset: 0,
@@ -263,7 +263,7 @@ This query retrieves records with pagination (10 records per page) and orders th
 To apply filters to your queries:
 
 ```
-var data = await orm.findAncCountAll(
+var data = await DartServerPlus.findAncCountAll(
   table: "users",
   where: {
     Op.lte: {'id': 10},
@@ -280,7 +280,7 @@ This query filters records to include only those with id less than or equal to 1
 To include related tables in your queries:
 
 ```
-var data = await orm.findAncCountAll(
+var data = await DartServerPlus.findAncCountAll(
   table: "users",
   include: [{'table': 'address'}]
 );
